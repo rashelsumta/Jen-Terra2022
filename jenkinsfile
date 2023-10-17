@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Check_out') {
+            steps {
+                git credentialsId: 'GitHub_credential', url: 'https://github.com/rashelsumta/Jen-Terra2022.git'
+            }
+        }
+        stage('Terraform init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform plan') {
+            steps {
+                sh 'terraform plan'
+            }
+        }
+         stage('Terraform apply') {
+            steps {
+                sh 'terraform apply --auto-approve'
+           }
+        }
+         //stage('Terraform destroy') {
+            //steps {
+                //sh 'terraform destroy --auto-approve'
+            //}
+        //}
+    }
+}
